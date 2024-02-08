@@ -1,4 +1,4 @@
-package branch.theme
+package branch.commons.theme
 
 import androidx.compose.ui.graphics.Color
 
