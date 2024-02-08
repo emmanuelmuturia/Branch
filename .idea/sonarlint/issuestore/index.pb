@@ -67,3 +67,17 @@ s
 Ccommons/domainlayer/src/main/java/branch/domainlayer/BranchState.kt,5/1/515a3d023fca2375023208be18f20c555667d2c0
 {
 Kcommons/datalayer/src/main/java/branch/datalayer/BranchSharedPreferences.kt,5/f/5f16d7605aebd23789fb5e14d9b3f51617c5cea1
+m
+=settings/uilayer/src/main/java/branch/settings/AboutScreen.kt,a/4/a435eee23ab480759ccf872f6b374c0167061826
+v
+Fsettings/uilayer/src/main/java/branch/settings/AboutScreenViewModel.kt,e/0/e074225ca6a62bce51198625827cc040e75be5d1
+|
+Lsettings/uilayer/src/main/java/branch/settings/about/AboutScreenViewModel.kt,b/6/b6e791c23692345d432e6867531b7104021b4ce2
+s
+Csettings/uilayer/src/main/java/branch/settings/about/AboutScreen.kt,7/d/7d3c0e83821258e587758aaf95d9b445ef61a538
+É
+Ssettings/domainlayer/src/main/java/branch/domainlayer/repository/AboutRepository.kt,d/4/d4775763d9c69982f4c210d1b0759953f9fee2d3
+ç
+]settings/datalayer/src/main/java/branch/datalayer/repository/AboutRepositoryImplementation.kt,d/d/dd6c3c2687d0dbff2e43515452e3cd206dc2f40c
+à
+Xsettings/datalayer/src/main/java/branch/datalayer/dependencyinjection/AboutHiltModule.kt,2/7/27ed7b2c1df8fdd77b37bf6146457f9566297f0f
