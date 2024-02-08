@@ -85,3 +85,15 @@ k
 ;navigation/src/main/java/branch/navigation/routes/Routes.kt,5/6/56556aaab972045d48174fde0786d191c6f48abe
 o
 ?navigation/src/main/java/branch/navigation/navgraph/NavGraph.kt,f/e/fe854b99d196c3013c0e7104c54c1c0c42b93589
+t
+Dauthentication/uilayer/src/main/java/branch/uilayer/WelcomeScreen.kt,a/6/a6eee9660c2d05ed61974f4de30c1a9d1ffb0ca0
+|
+Lauthentication/uilayer/src/main/java/branch/uilayer/welcome/WelcomeScreen.kt,7/1/71edab60ed3bf26631220c0dddb17d185680b816
+x
+Hauthentication/uilayer/src/main/java/branch/uilayer/login/LoginScreen.kt,d/4/d49ee764e000781735659c7b4bc107f6092ea4c8
+o
+?messages/uilayer/src/main/java/branch/uilayer/MessagesScreen.kt,d/c/dc8ede2cf2b33813df4bc1533ef00d5d861ebce2
+x
+Hmessages/uilayer/src/main/java/branch/uilayer/messages/MessagesScreen.kt,4/f/4fdf0949bcdefc795ef8f53001c621297111311d
+€
+Pmessages/uilayer/src/main/java/branch/uilayer/conversation/ConversationScreen.kt,8/1/81c1106b731c5e48e5e9d6677fb05eee44c5444d
