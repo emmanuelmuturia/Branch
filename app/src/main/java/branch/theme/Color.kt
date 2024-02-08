@@ -1,6 +1,9 @@
-package emmanuelmuturia.branch.ui.theme
+package branch.theme
 
 import androidx.compose.ui.graphics.Color
+
+val BranchLightBlue = Color(color = 0xFF47aadf)
+val BranchDarkBlue = Color(color = 0xFF0f71be)
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
