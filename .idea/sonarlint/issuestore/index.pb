@@ -97,3 +97,7 @@ x
 Hmessages/uilayer/src/main/java/branch/uilayer/messages/MessagesScreen.kt,4/f/4fdf0949bcdefc795ef8f53001c621297111311d
 €
 Pmessages/uilayer/src/main/java/branch/uilayer/conversation/ConversationScreen.kt,8/1/81c1106b731c5e48e5e9d6677fb05eee44c5444d
+>
+app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
