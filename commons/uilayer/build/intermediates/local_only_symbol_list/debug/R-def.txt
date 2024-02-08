@@ -1,0 +1,13 @@
+R_DEF: Internal format may change without notice
+local
+drawable branch
+drawable error
+font caveat_bold
+font caveat_medium
+font caveat_regular
+font caveat_semi_bold
+string arrow_back
+string branch_background_image
+string branch_footer
+string error_encountered_please_try_again
+string error_image

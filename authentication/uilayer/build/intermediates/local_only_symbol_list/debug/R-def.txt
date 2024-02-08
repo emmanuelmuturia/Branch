@@ -1,0 +1,8 @@
+R_DEF: Internal format may change without notice
+local
+string agreement
+string let_s_go
+string privacy_policy
+string terms_of_use
+string welcome
+string welcome_message
