@@ -3,6 +3,7 @@ plugins {
     alias(notation = libs.plugins.org.jetbrains.kotlin.android)
     alias(notation = libs.plugins.com.google.devtools.ksp)
     alias(notation = libs.plugins.com.google.dagger.hilt.android.plugin)
+    alias(notation = libs.plugins.com.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -36,6 +37,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompilerVersion.get()
@@ -48,6 +50,15 @@ android {
 }
 
 dependencies {
+
+    // Module(s)...
+    val moduleList = listOf(
+        "commons:uilayer"
+    )
+
+    moduleList.forEach { module ->
+        implementation(project(path = ":$module"))
+    }
 
     // Dagger-Hilt...
     implementation(dependencyNotation = libs.hilt.android)
