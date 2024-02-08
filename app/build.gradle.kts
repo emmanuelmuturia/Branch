@@ -60,6 +60,16 @@ android {
 
 dependencies {
 
+    // Module(s)...
+    val moduleList = listOf(
+        "commons:uilayer",
+        "navigation"
+    )
+
+    moduleList.forEach { module ->
+        implementation(project(path = ":$module"))
+    }
+
     // Firebase...
     implementation(dependencyNotation = platform(libs.firebase.bom))
     implementation(dependencyNotation = libs.firebase.analytics)

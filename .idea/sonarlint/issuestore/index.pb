@@ -81,3 +81,7 @@ Ssettings/domainlayer/src/main/java/branch/domainlayer/repository/AboutRepositor
 ]settings/datalayer/src/main/java/branch/datalayer/repository/AboutRepositoryImplementation.kt,d/d/dd6c3c2687d0dbff2e43515452e3cd206dc2f40c
 ˆ
 Xsettings/datalayer/src/main/java/branch/datalayer/dependencyinjection/AboutHiltModule.kt,2/7/27ed7b2c1df8fdd77b37bf6146457f9566297f0f
+k
+;navigation/src/main/java/branch/navigation/routes/Routes.kt,5/6/56556aaab972045d48174fde0786d191c6f48abe
+o
+?navigation/src/main/java/branch/navigation/navgraph/NavGraph.kt,f/e/fe854b99d196c3013c0e7104c54c1c0c42b93589
