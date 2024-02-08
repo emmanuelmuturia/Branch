@@ -1,6 +1,4 @@
 
-h
-8app/src/main/java/emmanuelmuturia/branch/MainActivity.kt,2/3/23b5484050439fc1df2cb2a0341d33fb4b43334f
 D
 app/build.gradle.kts,d/2/d2a4383452aad84a18429a5844d31330a012a9e6
 I
@@ -37,3 +35,15 @@ U
 %settings/domainlayer/build.gradle.kts,d/7/d771f16094eaa52f4388b7702bedbfadc05919fa
 Q
 !settings/uilayer/build.gradle.kts,1/6/1629f88d3fcfb10210f162364ae1063e53c17c1a
+q
+Aapp/src/main/java/branch/dependencyinjection/BranchApplication.kt,a/f/af171e44db1d95ae20cf830857d2a06392d08a5c
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+]
+-app/src/main/java/branch/main/MainActivity.kt,6/6/666e4187742bc6d5933ee42854246c761f2ca693
+W
+'app/src/main/java/branch/theme/Color.kt,1/d/1dda752e610356bf910c0b9549fc1f205bbcd4b3
+W
+'app/src/main/java/branch/theme/Theme.kt,8/9/8993f14042903c33f42e22482c57ed85dea73733
+V
+&app/src/main/java/branch/theme/Type.kt,f/1/f1368733e92ec6e107b35fde1c4532e4d6eab09c
