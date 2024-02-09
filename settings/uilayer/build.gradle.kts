@@ -52,7 +52,8 @@ dependencies {
     // Module(s)...
     val moduleList = listOf(
         "commons:uilayer",
-        "settings:domainlayer"
+        "settings:domainlayer",
+        "settings:datalayer"
     )
 
     moduleList.forEach { module ->

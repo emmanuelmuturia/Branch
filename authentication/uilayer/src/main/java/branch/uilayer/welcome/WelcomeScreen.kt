@@ -178,22 +178,25 @@ private fun HyperlinkText(
         for ((key, value) in hyperLinks) {
 
             val startIndex = fullText.indexOf(key)
-            val endIndex = startIndex + key.length
-            addStyle(
-                style = SpanStyle(
-                    fontSize = TextUnit.Unspecified,
-                    fontWeight = FontWeight.Normal,
-                    textDecoration = TextDecoration.Underline
-                ),
-                start = startIndex,
-                end = endIndex
-            )
-            addStringAnnotation(
-                tag = "URL",
-                annotation = value,
-                start = startIndex,
-                end = endIndex
-            )
+            if (startIndex >= 0) {
+                val endIndex = startIndex + key.length
+
+                addStyle(
+                    style = SpanStyle(
+                        fontSize = TextUnit.Unspecified,
+                        fontWeight = FontWeight.Normal,
+                        textDecoration = TextDecoration.Underline
+                    ),
+                    start = startIndex,
+                    end = endIndex
+                )
+                addStringAnnotation(
+                    tag = "URL",
+                    annotation = value,
+                    start = startIndex,
+                    end = endIndex
+                )
+            }
         }
         addStyle(
             style = SpanStyle(
@@ -212,7 +215,7 @@ private fun HyperlinkText(
         style = MaterialTheme.typography.labelLarge,
         onClick = {
             annotatedString
-                .getStringAnnotations("URL", it, it)
+                .getStringAnnotations(tag = "URL", start = it, end = it)
                 .firstOrNull()?.let { stringAnnotation ->
                     uriHandler.openUri(stringAnnotation.item)
                 }
