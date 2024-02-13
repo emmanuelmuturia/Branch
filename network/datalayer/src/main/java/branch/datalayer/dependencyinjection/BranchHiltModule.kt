@@ -24,12 +24,6 @@ object BranchHiltModule {
 
     @Provides
     @Singleton
-    fun providesBranchInterceptor(): BranchInterceptor {
-        return BranchInterceptor()
-    }
-
-    @Provides
-    @Singleton
     fun providesRetrofit(): Retrofit {
 
         val client = OkHttpClient.Builder().apply {
@@ -58,12 +52,10 @@ object BranchHiltModule {
     @Provides
     @Singleton
     fun providesBranchNetworkRepository(
-        branchApiService: BranchApiService,
-        branchInterceptor: BranchInterceptor
+        branchApiService: BranchApiService
     ): BranchNetworkRepository {
         return BranchNetworkRepositoryImplementation(
-            branchApiService = branchApiService,
-            branchInterceptor = branchInterceptor
+            branchApiService = branchApiService
         )
     }
 

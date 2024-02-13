@@ -10,7 +10,7 @@ data class BranchMessage(
     @SerialName(value = "thread_id")
     val messageThreadId: Int,
     @SerialName(value = "user_id")
-    val messageUserId: Int,
+    val messageUserId: String,
     @SerialName(value = "agent_id")
     val messageAgentId: Int?,
     @SerialName(value = "body")

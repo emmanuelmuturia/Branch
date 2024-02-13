@@ -9,8 +9,10 @@ interface BranchNetworkRepository {
 
     suspend fun getMessages(): List<BranchMessage>
 
-    suspend fun createMessage(messageThreadId: Int, messageBody: String): Call<BranchMessage>
+    suspend fun createMessage(messageThreadId: Int, messageBody: String): BranchMessage
 
     suspend fun login(username: String, password: String): LoginResponse?
+
+    suspend fun getMessagesByThread(threadId: Int): List<BranchMessage>
 
 }

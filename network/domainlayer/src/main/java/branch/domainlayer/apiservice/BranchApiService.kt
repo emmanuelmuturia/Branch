@@ -3,6 +3,7 @@ package branch.domainlayer.apiservice
 import branch.domainlayer.dto.BranchMessage
 import branch.domainlayer.dto.LoginRequest
 import branch.domainlayer.dto.LoginResponse
+import branch.domainlayer.dto.MessageRequest
 import branch.network.domainlayer.BuildConfig
 import retrofit2.Call
 import retrofit2.http.Body
@@ -22,8 +23,10 @@ interface BranchApiService {
 
     @POST(value = BuildConfig.messagesEndpoint)
     suspend fun createMessage(
-        @Query(value = "thread_id") messageThreadId: Int,
-        @Body messageBody: String
-    ): Call<BranchMessage>
+        @Body messageRequest: MessageRequest
+    ): BranchMessage
+
+    @GET(value = BuildConfig.messagesEndpoint)
+    suspend fun getMessageByThread(@Query(value = "thread_id") threadId: Int): List<BranchMessage>
 
 }

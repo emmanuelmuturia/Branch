@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import branch.commons.components.BranchBackgroundImage
 import branch.commons.state.ErrorScreen
 import branch.commons.state.LoadingScreen
@@ -38,7 +39,7 @@ import branch.domainlayer.dto.BranchMessage
 import java.util.Calendar
 
 @Composable
-fun MessagesScreen() {
+fun MessagesScreen(navController: NavHostController) {
 
     val messagesScreenViewModel: MessagesScreenViewModel = hiltViewModel()
     val branchState by messagesScreenViewModel.branchState.collectAsStateWithLifecycle()
@@ -64,7 +65,7 @@ fun MessagesScreen() {
                 ) {
 
                     items(items = branchMessages) { branchMessage ->
-                        BranchMessageItem(branchMessage = branchMessage)
+                        BranchMessageItem(branchMessage = branchMessage, navController = navController)
                     }
 
                 }
@@ -123,13 +124,16 @@ fun HomeScreenHeader() {
 
 
 @Composable
-fun BranchMessageItem(branchMessage: BranchMessage) {
+fun BranchMessageItem(branchMessage: BranchMessage, navController: NavHostController) {
 
     Card(
         modifier = Modifier
             .height(height = 149.dp)
             .fillMaxWidth()
-            .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
+            .padding(start = 10.dp, end = 10.dp, bottom = 10.dp)
+            .clickable {
+                navController.navigate(route = "conversationScreen/${branchMessage.messageThreadId}")
+            },
         elevation = CardDefaults.cardElevation(7.dp),
         colors = CardDefaults.cardColors(containerColor = BranchLightBlue)
     ) {

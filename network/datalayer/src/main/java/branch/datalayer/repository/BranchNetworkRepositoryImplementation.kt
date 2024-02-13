@@ -5,14 +5,14 @@ import branch.domainlayer.apiservice.BranchApiService
 import branch.domainlayer.dto.BranchMessage
 import branch.domainlayer.dto.LoginRequest
 import branch.domainlayer.dto.LoginResponse
+import branch.domainlayer.dto.MessageRequest
 import branch.domainlayer.repository.BranchNetworkRepository
 import retrofit2.Call
 import timber.log.Timber
 import javax.inject.Inject
 
 class BranchNetworkRepositoryImplementation @Inject constructor(
-    private val branchApiService: BranchApiService,
-    private val branchInterceptor: BranchInterceptor
+    private val branchApiService: BranchApiService
 ) : BranchNetworkRepository {
 
     override suspend fun getMessages(): List<BranchMessage> {
@@ -23,10 +23,12 @@ class BranchNetworkRepositoryImplementation @Inject constructor(
     override suspend fun createMessage(
         messageThreadId: Int,
         messageBody: String
-    ): Call<BranchMessage> {
+    ): BranchMessage {
         return branchApiService.createMessage(
-            messageThreadId = messageThreadId,
-            messageBody = messageBody
+            messageRequest = MessageRequest(
+                messageThreadId = messageThreadId,
+                messageBody = messageBody
+            )
         )
     }
 
@@ -39,13 +41,15 @@ class BranchNetworkRepositoryImplementation @Inject constructor(
 
         return try {
             val response = branchApiService.login(loginRequest = loginRequest)
-            branchInterceptor.setAuthToken(token = response.authToken)
-            Timber.tag(tag = "Response Auth Token").d(message = response.authToken)
             response
         } catch (e: Exception) {
             null
         }
 
+    }
+
+    override suspend fun getMessagesByThread(threadId: Int): List<BranchMessage> {
+        return branchApiService.getMessageByThread(threadId = threadId)
     }
 
 }
