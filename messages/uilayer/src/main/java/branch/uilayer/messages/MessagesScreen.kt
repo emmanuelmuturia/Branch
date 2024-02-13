@@ -54,7 +54,9 @@ fun MessagesScreen(navController: NavHostController) {
             Icon(
                 modifier = Modifier
                     .size(size = 30.dp)
-                    .clickable(onClick = { }),
+                    .clickable(onClick = {
+                        messagesScreenViewModel.getMessages()
+                    }),
                 imageVector = Icons.Rounded.Refresh,
                 contentDescription = "Search Button",
                 tint = Color.White

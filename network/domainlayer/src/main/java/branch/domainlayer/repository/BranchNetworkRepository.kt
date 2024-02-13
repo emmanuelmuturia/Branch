@@ -15,4 +15,6 @@ interface BranchNetworkRepository {
 
     suspend fun getMessagesByThread(threadId: Int): List<BranchMessage>
 
+    suspend fun reset()
+
 }

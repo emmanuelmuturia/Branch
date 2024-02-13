@@ -30,7 +30,7 @@ class MessagesScreenViewModel @Inject constructor(
         getMessages()
     }
 
-    private fun getMessages() {
+    fun getMessages() {
 
         viewModelScope.launch {
 
@@ -45,6 +45,12 @@ class MessagesScreenViewModel @Inject constructor(
 
         }
 
+    }
+
+    fun reset() {
+        viewModelScope.launch {
+            branchNetworkRepository.reset()
+        }
     }
 
 }

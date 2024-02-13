@@ -27,9 +27,6 @@ interface BranchApiService {
         @Body messageRequest: MessageRequest
     ): BranchMessage
 
-    @GET(value = BuildConfig.messagesEndpoint)
-    suspend fun getMessageByThread(@Query(value = "thread_id") threadId: Int): List<BranchMessage>
-
     @POST(value = BuildConfig.resetEndpoint)
     suspend fun reset()
 

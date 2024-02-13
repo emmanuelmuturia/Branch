@@ -52,4 +52,8 @@ class BranchNetworkRepositoryImplementation @Inject constructor(
         return branchApiService.getMessages().filter { it.messageThreadId == threadId }
     }
 
+    override suspend fun reset() {
+        branchApiService.reset()
+    }
+
 }
