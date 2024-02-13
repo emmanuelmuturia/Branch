@@ -8,7 +8,7 @@ sealed class Routes(val route: String) {
 
     data object MessagesScreen : Routes(route = "messagesScreen")
 
-    data object ConversationScreen : Routes(route = "conversationScreen")
+    data object ConversationScreen : Routes(route = "conversationScreen/{messageThreadId}")
 
     data object AboutScreen : Routes(route = "aboutScreen")
 

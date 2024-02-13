@@ -228,3 +228,6 @@ com-google-firebase-performance = { id = "com.google.firebase.firebase-perf", ve
 
 # AppSweep...
 com-guardsquare-appsweep = { id = "com.guardsquare.appsweep", version.ref = "appSweepGradlePluginVersion" }
+
+# Kotlin Serialization...
+org-jetbrains-kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerializationVersion" }

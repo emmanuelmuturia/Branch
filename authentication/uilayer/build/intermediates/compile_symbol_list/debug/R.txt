@@ -1,3 +1,4 @@
+int drawable login 0x0
 int string agreement 0x0
 int string let_s_go 0x0
 int string privacy_policy 0x0

@@ -3,8 +3,10 @@ package branch.navigation.navgraph
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import branch.commons.state.ErrorScreen
 import branch.commons.state.LoadingScreen
 import branch.datalayer.BranchSharedPreferences
@@ -26,19 +28,27 @@ fun NavGraph(navController: NavHostController) {
     ) {
 
         composable(route = Routes.WelcomeScreen.route) {
-            WelcomeScreen { navController.navigate(route = Routes.MessagesScreen.route) }
+            WelcomeScreen { navController.navigate(route = Routes.LoginScreen.route) }
         }
 
         composable(route = Routes.LoginScreen.route) {
-            LoginScreen()
+            LoginScreen(
+                navigateToMessagesScreen = { navController.navigate(route = Routes.MessagesScreen.route) }
+            )
         }
 
         composable(route = Routes.MessagesScreen.route) {
-            MessagesScreen()
+            MessagesScreen(navController = navController)
         }
 
-        composable(route = Routes.ConversationScreen.route) {
-            ConversationScreen()
+        composable(route = Routes.ConversationScreen.route, arguments = listOf(
+            navArgument(name = "messageThreadId") {
+                type = NavType.IntType
+            }
+        )) {
+            ConversationScreen(
+                navigateBack = { navController.popBackStack() },
+                navController = navController)
         }
 
         composable(route = Routes.AboutScreen.route) {

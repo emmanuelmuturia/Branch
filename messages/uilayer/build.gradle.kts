@@ -49,6 +49,18 @@ android {
 
 dependencies {
 
+    // Module(s)...
+    val moduleList = listOf(
+        "commons:uilayer",
+        "network:domainlayer",
+        "commons:domainlayer",
+        "network:datalayer"
+    )
+
+    moduleList.forEach { module ->
+        implementation(project(path = ":$module"))
+    }
+
     // Dagger-Hilt...
     implementation(dependencyNotation = libs.hilt.android)
     "ksp"(dependencyNotation = libs.hilt.android.compiler)

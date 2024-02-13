@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+drawable login
 string agreement
 string let_s_go
 string privacy_policy
