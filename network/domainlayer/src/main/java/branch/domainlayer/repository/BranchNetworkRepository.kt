@@ -11,6 +11,6 @@ interface BranchNetworkRepository {
 
     suspend fun createMessage(messageThreadId: Int, messageBody: String): Call<BranchMessage>
 
-    suspend fun login(username: String, password: String): LoginResponse
+    suspend fun login(username: String, password: String): LoginResponse?
 
 }

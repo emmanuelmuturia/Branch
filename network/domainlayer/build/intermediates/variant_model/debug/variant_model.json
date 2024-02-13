@@ -1,5 +1,5 @@
-è
-å
+´
+®
 !
 
 authHeaderX-Branch-Auth-Token
@@ -14,5 +14,7 @@ termsOfUsehttps://branch.co.ke/tou/ke
 	authTokenipqnAMSlh5JF2SSpgjYBGQ
  
 messagesEndpointapi/messages
+
+loginEndpoint	api/login
 
 resetEndpoint	api/reset

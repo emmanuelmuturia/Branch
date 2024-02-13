@@ -1,7 +1,6 @@
 package branch.datalayer.repository
 
 import branch.datalayer.interceptor.BranchInterceptor
-import branch.domainlayer.BranchState
 import branch.domainlayer.apiservice.BranchApiService
 import branch.domainlayer.dto.BranchMessage
 import branch.domainlayer.dto.LoginRequest
@@ -28,18 +27,20 @@ class BranchNetworkRepositoryImplementation @Inject constructor(
         )
     }
 
-    override suspend fun login(username: String, password: String): LoginResponse {
+    override suspend fun login(username: String, password: String): LoginResponse? {
 
         val loginRequest = LoginRequest(
             username = username,
             password = password
         )
 
-
-        val response = branchApiService.login(loginRequest = loginRequest)
-        BranchInterceptor().authToken = response.authToken
-
-        return response
+        return try {
+            val response = branchApiService.login(loginRequest = loginRequest)
+            BranchInterceptor().authToken = response.authToken
+            response
+        } catch (e: Exception) {
+            null
+        }
 
     }
 

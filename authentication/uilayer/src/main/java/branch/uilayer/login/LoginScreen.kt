@@ -1,5 +1,6 @@
 package branch.uilayer.login
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,16 +23,26 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import branch.authentication.uilayer.R
 import branch.commons.components.BranchBackgroundImage
 import branch.commons.theme.BranchLightBlue
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    navigateToMessagesScreen: () -> Unit
+) {
+
+    var username by rememberSaveable { mutableStateOf(value = "") }
+
+    var password by rememberSaveable { mutableStateOf(value = "") }
+
+    val loginScreenViewModel: LoginScreenViewModel = hiltViewModel()
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -51,9 +62,19 @@ fun LoginScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                LoginTextFields()
+                LoginTextFields(
+                    username = username,
+                    onUsernameChanged = { username = it },
+                    password = password,
+                    onPasswordChanged = { password = it }
+                )
 
-                LoginButton()
+                LoginButton(
+                    username = username,
+                    password = password,
+                    loginScreenViewModel = loginScreenViewModel,
+                    navigateToMessagesScreen = navigateToMessagesScreen
+                )
 
             }
 
@@ -78,15 +99,16 @@ fun LoginScreenLogo() {
 
 
 @Composable
-fun LoginTextFields() {
-
-    var userName by rememberSaveable { mutableStateOf(value = "") }
-
-    var password by rememberSaveable { mutableStateOf(value = "") }
+fun LoginTextFields(
+    username: String,
+    password: String,
+    onUsernameChanged: (String) -> Unit,
+    onPasswordChanged: (String) -> Unit
+) {
 
     OutlinedTextField(
-        value = userName,
-        onValueChange = { userName = it },
+        value = username,
+        onValueChange = { onUsernameChanged(it) },
         label = {},
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
@@ -94,7 +116,7 @@ fun LoginTextFields() {
 
     OutlinedTextField(
         value = password,
-        onValueChange = { password = it },
+        onValueChange = { onPasswordChanged(it) },
         label = {},
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -105,10 +127,26 @@ fun LoginTextFields() {
 
 
 @Composable
-fun LoginButton() {
+fun LoginButton(
+    username: String,
+    password: String,
+    loginScreenViewModel: LoginScreenViewModel,
+    navigateToMessagesScreen: () -> Unit
+) {
+
+    val isLoginSuccessful = loginScreenViewModel.isLoginSuccessful
+
+    val context = LocalContext.current
 
     Button(
-        onClick = { },
+        onClick = {
+            loginScreenViewModel.login(username = username, password = password)
+            if (isLoginSuccessful) navigateToMessagesScreen() else Toast.makeText(
+                context,
+                "Wrong Credentials!!!",
+                Toast.LENGTH_LONG
+            ).show()
+        },
         shape = RoundedCornerShape(size = 21.dp),
         colors = ButtonDefaults.buttonColors(containerColor = BranchLightBlue)
     ) {

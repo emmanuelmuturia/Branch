@@ -30,7 +30,9 @@ fun NavGraph(navController: NavHostController) {
         }
 
         composable(route = Routes.LoginScreen.route) {
-            LoginScreen()
+            LoginScreen(
+                navigateToMessagesScreen = { navController.navigate(route = Routes.MessagesScreen.route) }
+            )
         }
 
         composable(route = Routes.MessagesScreen.route) {

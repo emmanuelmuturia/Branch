@@ -1,7 +1,20 @@
-W
-U
+«
+¨
+!
+
+authHeaderX-Branch-Auth-Token
+/
+baseUrl$https://android-messaging.branch.co/
 )
 
 termsOfUsehttps://branch.co.ke/tou/ke
 (
 privacyPolicyhttps://branch.co.ke/pp
+#
+	authTokenipqnAMSlh5JF2SSpgjYBGQ
+ 
+messagesEndpointapi/messages
+
+loginEndpoint	api/login
+
+resetEndpoint	api/reset
