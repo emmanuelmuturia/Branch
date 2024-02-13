@@ -47,13 +47,13 @@ import branch.commons.components.BranchBackgroundImage
 import branch.commons.theme.BranchDarkBlue
 
 @Composable
-fun WelcomeScreen(navigateToMessagesScreen: () -> Unit) {
+fun WelcomeScreen(navigateToLoginScreen: () -> Unit) {
 
     Box(modifier = Modifier.fillMaxSize()) {
 
         BranchBackgroundImage()
 
-        WelcomeScreenBottomSheet(navigateToMessagesScreen = navigateToMessagesScreen)
+        WelcomeScreenBottomSheet(navigateToMessagesScreen = navigateToLoginScreen)
 
     }
 

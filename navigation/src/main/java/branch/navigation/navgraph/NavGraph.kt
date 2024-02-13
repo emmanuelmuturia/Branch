@@ -26,7 +26,7 @@ fun NavGraph(navController: NavHostController) {
     ) {
 
         composable(route = Routes.WelcomeScreen.route) {
-            WelcomeScreen { navController.navigate(route = Routes.MessagesScreen.route) }
+            WelcomeScreen { navController.navigate(route = Routes.LoginScreen.route) }
         }
 
         composable(route = Routes.LoginScreen.route) {

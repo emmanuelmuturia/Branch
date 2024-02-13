@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -26,12 +27,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import branch.authentication.uilayer.R
 import branch.commons.components.BranchBackgroundImage
 import branch.commons.theme.BranchLightBlue
+import kotlinx.coroutines.flow.first
 
 @Composable
 fun LoginScreen(
@@ -120,7 +122,7 @@ fun LoginTextFields(
         label = {},
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        visualTransformation = PasswordVisualTransformation()
+        //visualTransformation = PasswordVisualTransformation()
     )
 
 }
@@ -134,25 +136,32 @@ fun LoginButton(
     navigateToMessagesScreen: () -> Unit
 ) {
 
-    val isLoginSuccessful = loginScreenViewModel.isLoginSuccessful
+    val isLoginSuccessful by loginScreenViewModel.isLoginSuccessful.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
 
     Button(
         onClick = {
             loginScreenViewModel.login(username = username, password = password)
-            if (isLoginSuccessful) navigateToMessagesScreen() else Toast.makeText(
-                context,
-                "Wrong Credentials!!!",
-                Toast.LENGTH_LONG
-            ).show()
         },
         shape = RoundedCornerShape(size = 21.dp),
         colors = ButtonDefaults.buttonColors(containerColor = BranchLightBlue)
     ) {
-
         Text(text = "Login", style = MaterialTheme.typography.bodyLarge)
-
     }
 
+    LaunchedEffect(isLoginSuccessful) {
+        if (isLoginSuccessful) {
+            navigateToMessagesScreen()
+        }
+    }
+
+    LaunchedEffect(loginScreenViewModel.isLoginSuccessful) {
+        val updatedIsLoginSuccessful = loginScreenViewModel.isLoginSuccessful.first()
+        if (updatedIsLoginSuccessful) {
+            navigateToMessagesScreen()
+        } else {
+            Toast.makeText(context, "Wrong Credentials!!!", Toast.LENGTH_LONG).show()
+        }
+    }
 }

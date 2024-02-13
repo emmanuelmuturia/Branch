@@ -19,20 +19,21 @@ class LoginScreenViewModel @Inject constructor(
     private val branchNetworkRepository: BranchNetworkRepository
 ) : AndroidViewModel(application = application) {
 
-    var isLoginSuccessful: Boolean = false
+    private var _isLoginSuccessful: MutableStateFlow<Boolean> = MutableStateFlow(value = false)
+    val isLoginSuccessful: StateFlow<Boolean> = _isLoginSuccessful.asStateFlow()
 
     fun login(username: String, password: String) {
 
         viewModelScope.launch {
 
-            isLoginSuccessful = try {
+            try {
                 branchNetworkRepository.login(
                     username = username,
                     password = password
                 )
-                true
+                _isLoginSuccessful.value = true
             } catch (e: Exception) {
-                false
+                _isLoginSuccessful.value = false
             }
 
         }

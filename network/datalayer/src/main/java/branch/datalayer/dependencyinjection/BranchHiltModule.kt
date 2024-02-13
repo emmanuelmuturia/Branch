@@ -12,13 +12,21 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object BranchHiltModule {
+
+    @Provides
+    @Singleton
+    fun providesBranchInterceptor(): BranchInterceptor {
+        return BranchInterceptor()
+    }
 
     @Provides
     @Singleton
@@ -49,8 +57,14 @@ object BranchHiltModule {
 
     @Provides
     @Singleton
-    fun providesBranchNetworkRepository(branchApiService: BranchApiService): BranchNetworkRepository {
-        return BranchNetworkRepositoryImplementation(branchApiService = branchApiService)
+    fun providesBranchNetworkRepository(
+        branchApiService: BranchApiService,
+        branchInterceptor: BranchInterceptor
+    ): BranchNetworkRepository {
+        return BranchNetworkRepositoryImplementation(
+            branchApiService = branchApiService,
+            branchInterceptor = branchInterceptor
+        )
     }
 
 }
