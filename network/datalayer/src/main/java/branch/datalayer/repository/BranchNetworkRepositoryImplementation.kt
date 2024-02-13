@@ -49,7 +49,7 @@ class BranchNetworkRepositoryImplementation @Inject constructor(
     }
 
     override suspend fun getMessagesByThread(threadId: Int): List<BranchMessage> {
-        return branchApiService.getMessageByThread(threadId = threadId)
+        return branchApiService.getMessages().filter { it.messageThreadId == threadId }
     }
 
 }

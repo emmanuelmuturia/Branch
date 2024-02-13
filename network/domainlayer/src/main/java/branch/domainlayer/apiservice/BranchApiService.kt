@@ -9,6 +9,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface BranchApiService {
@@ -28,5 +29,8 @@ interface BranchApiService {
 
     @GET(value = BuildConfig.messagesEndpoint)
     suspend fun getMessageByThread(@Query(value = "thread_id") threadId: Int): List<BranchMessage>
+
+    @POST(value = BuildConfig.resetEndpoint)
+    suspend fun reset()
 
 }

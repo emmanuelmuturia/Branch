@@ -48,9 +48,7 @@ fun NavGraph(navController: NavHostController) {
         )) {
             ConversationScreen(
                 navigateBack = { navController.popBackStack() },
-                navController = navController,
-                navigateToMessagesScreen = { navController.navigate(route = Routes.MessagesScreen.route) }
-            )
+                navController = navController)
         }
 
         composable(route = Routes.AboutScreen.route) {

@@ -7,6 +7,7 @@ import branch.domainlayer.BranchState
 import branch.domainlayer.dto.BranchMessage
 import branch.domainlayer.repository.BranchNetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,10 +21,6 @@ class ConversationScreenViewModel @Inject constructor(
     private val branchNetworkRepository: BranchNetworkRepository
 ) : AndroidViewModel(application = application) {
 
-    private var _branchState: MutableStateFlow<BranchState<Any>> =
-        MutableStateFlow(value = BranchState.Loading)
-    val branchState: StateFlow<BranchState<Any>> = _branchState.asStateFlow()
-
     private var _branchMessages: MutableStateFlow<List<BranchMessage>> =
         MutableStateFlow(value = emptyList())
     val branchMessages: StateFlow<List<BranchMessage>> = _branchMessages.asStateFlow()
@@ -31,23 +28,25 @@ class ConversationScreenViewModel @Inject constructor(
     private var _isLoading = MutableStateFlow(value = false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
-    /*init {
-        getMessagesByThread(threadId = 0)
-    }*/
-
     fun getMessagesByThread(threadId: Int) {
 
         viewModelScope.launch {
 
-            _branchState.update { BranchState.Loading }
+            _branchMessages.value = branchNetworkRepository.getMessagesByThread(threadId = threadId)
 
-            try {
-                _branchMessages.value =
-                    branchNetworkRepository.getMessagesByThread(threadId = threadId)
-                _branchState.update { BranchState.Success(data = _branchMessages.value) }
-            } catch (e: Exception) {
+        }
 
-            }
+    }
+
+
+    fun refreshGetMessagesByThread(threadId: Int) {
+
+        viewModelScope.launch {
+
+            _isLoading.value = true
+            branchNetworkRepository.getMessagesByThread(threadId = threadId)
+            delay(timeMillis = 1400L)
+            _isLoading.value = false
 
         }
 

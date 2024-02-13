@@ -15,11 +15,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Notifications
+import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,6 +36,7 @@ import androidx.navigation.NavHostController
 import branch.commons.components.BranchBackgroundImage
 import branch.commons.state.ErrorScreen
 import branch.commons.state.LoadingScreen
+import branch.commons.theme.BranchDarkBlue
 import branch.commons.theme.BranchLightBlue
 import branch.domainlayer.BranchState
 import branch.domainlayer.dto.BranchMessage
@@ -45,27 +49,42 @@ fun MessagesScreen(navController: NavHostController) {
     val branchState by messagesScreenViewModel.branchState.collectAsStateWithLifecycle()
     val branchMessages by messagesScreenViewModel.branchMessages.collectAsStateWithLifecycle()
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Scaffold(floatingActionButton = {
+        FloatingActionButton(onClick = {  }, containerColor = BranchDarkBlue) {
+            Icon(
+                modifier = Modifier
+                    .size(size = 30.dp)
+                    .clickable(onClick = { }),
+                imageVector = Icons.Rounded.Refresh,
+                contentDescription = "Search Button",
+                tint = Color.White
+            )
+        }
+    }) { it
 
-        BranchBackgroundImage()
+        Box(modifier = Modifier.fillMaxSize()) {
 
-        Column(modifier = Modifier.fillMaxSize()) {
+            BranchBackgroundImage()
 
-            HomeScreenHeader()
+            Column(modifier = Modifier.fillMaxSize()) {
 
-            when (branchState) {
+                HomeScreenHeader()
 
-                is BranchState.Loading -> LoadingScreen()
+                when (branchState) {
 
-                is BranchState.Error -> ErrorScreen {}
+                    is BranchState.Loading -> LoadingScreen()
 
-                else -> LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
+                    is BranchState.Error -> ErrorScreen {}
 
-                    items(items = branchMessages) { branchMessage ->
-                        BranchMessageItem(branchMessage = branchMessage, navController = navController)
+                    else -> LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                    ) {
+
+                        items(items = branchMessages) { branchMessage ->
+                            BranchMessageItem(branchMessage = branchMessage, navController = navController)
+                        }
+
                     }
 
                 }
