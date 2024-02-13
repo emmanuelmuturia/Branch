@@ -1,7 +1,11 @@
 package branch.datalayer.repository
 
+import branch.datalayer.interceptor.BranchInterceptor
+import branch.domainlayer.BranchState
 import branch.domainlayer.apiservice.BranchApiService
 import branch.domainlayer.dto.BranchMessage
+import branch.domainlayer.dto.LoginRequest
+import branch.domainlayer.dto.LoginResponse
 import branch.domainlayer.repository.BranchNetworkRepository
 import retrofit2.Call
 import javax.inject.Inject
@@ -14,11 +18,29 @@ class BranchNetworkRepositoryImplementation @Inject constructor(
         return branchApiService.getMessages()
     }
 
-    override suspend fun createMessage(messageThreadId: Int, messageBody: String): Call<BranchMessage> {
+    override suspend fun createMessage(
+        messageThreadId: Int,
+        messageBody: String
+    ): Call<BranchMessage> {
         return branchApiService.createMessage(
             messageThreadId = messageThreadId,
             messageBody = messageBody
         )
+    }
+
+    override suspend fun login(username: String, password: String): LoginResponse {
+
+        val loginRequest = LoginRequest(
+            username = username,
+            password = password
+        )
+
+
+        val response = branchApiService.login(loginRequest = loginRequest)
+        BranchInterceptor().authToken = response.authToken
+
+        return response
+
     }
 
 }
