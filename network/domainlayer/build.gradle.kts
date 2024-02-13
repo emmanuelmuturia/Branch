@@ -49,6 +49,15 @@ android {
 
 dependencies {
 
+    // Retrofit2
+    implementation(libs.retrofit)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+
+    //OkHTTP3...
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
     // Dagger-Hilt...
     implementation(dependencyNotation = libs.hilt.android)
     "ksp"(dependencyNotation = libs.hilt.android.compiler)
