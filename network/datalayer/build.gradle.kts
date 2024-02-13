@@ -51,6 +51,15 @@ android {
 
 dependencies {
 
+    // Module(s)...
+    val moduleList = listOf(
+        "network:domainlayer"
+    )
+
+    moduleList.forEach { module ->
+        implementation(project(path = ":$module"))
+    }
+
     // Retrofit2
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)
