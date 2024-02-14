@@ -67,6 +67,11 @@ Branch is an Android application that utilises a REST API built and maintained b
 
 ![The Unit Tests](https://github.com/emmanuelmuturia/Branch/assets/55001497/a2433afd-2e9f-4f45-b97e-5ccbac38e0b8)
 
+- Use the following command to run The Unit Tests:
+
+```
+./gradlew test
+```
 
 ### b) UI Tests
 - The UI Tests have been performed using a Robo Test by Firebase Test Lab:
