@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.Refresh
@@ -28,8 +29,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -38,6 +45,7 @@ import branch.commons.state.ErrorScreen
 import branch.commons.state.LoadingScreen
 import branch.commons.theme.BranchDarkBlue
 import branch.commons.theme.BranchLightBlue
+import branch.commons.theme.Caveat
 import branch.domainlayer.BranchState
 import branch.domainlayer.dto.BranchMessage
 import java.util.Calendar
@@ -50,19 +58,19 @@ fun MessagesScreen(navController: NavHostController) {
     val branchMessages by messagesScreenViewModel.branchMessages.collectAsStateWithLifecycle()
 
     Scaffold(floatingActionButton = {
-        FloatingActionButton(onClick = {  }, containerColor = BranchDarkBlue) {
+        FloatingActionButton(onClick = {
+            messagesScreenViewModel.getMessages()
+        }, containerColor = BranchDarkBlue) {
             Icon(
                 modifier = Modifier
-                    .size(size = 30.dp)
-                    .clickable(onClick = {
-                        messagesScreenViewModel.reset()
-                    }),
+                    .size(size = 30.dp),
                 imageVector = Icons.Rounded.Refresh,
                 contentDescription = "Search Button",
                 tint = Color.White
             )
         }
-    }) { it
+    }) {
+        it
 
         Box(modifier = Modifier.fillMaxSize()) {
 
@@ -84,7 +92,10 @@ fun MessagesScreen(navController: NavHostController) {
                     ) {
 
                         items(items = branchMessages) { branchMessage ->
-                            BranchMessageItem(branchMessage = branchMessage, navController = navController)
+                            BranchMessageItem(
+                                branchMessage = branchMessage,
+                                navController = navController
+                            )
                         }
 
                     }
@@ -126,7 +137,7 @@ fun HomeScreenHeader() {
                     .clickable(onClick = { }),
                 imageVector = Icons.Rounded.Search,
                 contentDescription = "Search Button",
-                tint = Color.Black
+                tint = BranchDarkBlue
             )
 
             Icon(
@@ -137,7 +148,7 @@ fun HomeScreenHeader() {
                     }),
                 imageVector = Icons.Rounded.Notifications,
                 contentDescription = "Notifications Button",
-                tint = Color.Black
+                tint = BranchDarkBlue
             )
         }
     }
@@ -149,9 +160,9 @@ fun BranchMessageItem(branchMessage: BranchMessage, navController: NavHostContro
 
     Card(
         modifier = Modifier
-            .height(height = 149.dp)
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp, bottom = 10.dp)
+            .clip(shape = RoundedCornerShape(size = 21.dp))
             .clickable {
                 navController.navigate(route = "conversationScreen/${branchMessage.messageThreadId}")
             },
@@ -170,12 +181,116 @@ fun BranchMessageItem(branchMessage: BranchMessage, navController: NavHostContro
                 verticalArrangement = Arrangement.spacedBy(3.dp),
                 horizontalAlignment = Alignment.Start
             ) {
+
                 Text(
-                    text = branchMessage.messageTimestamp,
-                    style = MaterialTheme.typography.titleLarge
+                    text = buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color.White,
+                                fontFamily = Caveat,
+                                fontSize = 28.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        ) {
+                            append(text = "User ID: ")
+                        }
+
+                        withStyle(
+                            style = SpanStyle(
+                                fontFamily = Caveat,
+                                fontSize = 21.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Medium
+                            )
+                        ) {
+                            append(text = branchMessage.messageUserId)
+                        }
+
+                    }
                 )
+
+                if (branchMessage.messageAgentId != null) {
+
+                    Spacer(modifier = Modifier.height(height = 7.dp))
+
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.White,
+                                    fontFamily = Caveat,
+                                    fontSize = 28.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            ) {
+                                append(text = "Agent ID: ")
+                            }
+                            withStyle(
+                                style = SpanStyle(
+                                    fontFamily = Caveat,
+                                    fontSize = 21.sp,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Medium
+                                )
+                            ) {
+                                append(text = branchMessage.messageAgentId.toString())
+                            }
+                        }
+                    )
+
+                }
+
                 Spacer(modifier = Modifier.height(height = 7.dp))
-                Text(text = branchMessage.messageBody, style = MaterialTheme.typography.bodyLarge)
+
+                Text(
+                    text = buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color.White,
+                                fontFamily = Caveat,
+                                fontSize = 28.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        ) {
+                            append(text = "Sent At: ")
+                        }
+                        withStyle(
+                            style = SpanStyle(
+                                fontFamily = Caveat,
+                                fontSize = 21.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Medium
+                            )
+                        ) {
+                            append(text = branchMessage.messageTimestamp)
+                        }
+                    }
+                )
+
+                Spacer(modifier = Modifier.height(height = 7.dp))
+
+                Text(text = buildAnnotatedString {
+                    withStyle(
+                        style = SpanStyle(
+                            color = Color.White,
+                            fontFamily = Caveat,
+                            fontSize = 28.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    ) {
+                        append(text = "Message: ")
+                    }
+                    withStyle(style = SpanStyle(
+                        fontFamily = Caveat,
+                        fontSize = 21.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Medium
+                    )
+                    ) {
+                        append(text = branchMessage.messageBody)
+                    }
+                })
+
             }
 
         }
