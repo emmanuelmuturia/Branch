@@ -1,0 +1,7 @@
+int string agent_id 0x0
+int string good_afternoon 0x0
+int string good_evening 0x0
+int string good_morning 0x0
+int string message 0x0
+int string sent_at 0x0
+int string user_id 0x0

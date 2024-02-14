@@ -1,1 +1,5 @@
 int drawable login 0x0
+int string enter_password 0x0
+int string enter_username 0x0
+int string login 0x0
+int string login_screen_logo 0x0

@@ -1,3 +1,7 @@
 R_DEF: Internal format may change without notice
 local
 drawable login
+string enter_password
+string enter_username
+string login
+string login_screen_logo
