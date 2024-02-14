@@ -1,7 +1,6 @@
 package branch.datalayer.repository
 
 import android.content.Context
-import branch.datalayer.interceptor.BranchInterceptor
 import branch.datalayer.sessionmanager.SessionManager
 import branch.domainlayer.apiservice.BranchApiService
 import branch.domainlayer.dto.BranchMessage
@@ -9,7 +8,6 @@ import branch.domainlayer.dto.LoginRequest
 import branch.domainlayer.dto.LoginResponse
 import branch.domainlayer.dto.MessageRequest
 import branch.domainlayer.repository.BranchNetworkRepository
-import retrofit2.Call
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -58,8 +56,8 @@ class BranchNetworkRepositoryImplementation @Inject constructor(
         return branchApiService.getMessages().filter { it.messageThreadId == threadId }
     }
 
-    override suspend fun reset() {
-        branchApiService.reset()
+    override suspend fun resetMessages() {
+        branchApiService.resetMessages()
     }
 
 }

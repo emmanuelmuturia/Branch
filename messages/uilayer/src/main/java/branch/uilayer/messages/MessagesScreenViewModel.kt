@@ -48,7 +48,7 @@ class MessagesScreenViewModel @Inject constructor(
 
     fun reset() {
         viewModelScope.launch {
-            branchNetworkRepository.reset()
+            branchNetworkRepository.resetMessages()
         }
     }
 

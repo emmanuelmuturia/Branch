@@ -60,6 +60,15 @@ Branch is an Android application that utilises a REST API built and maintained b
 - It provides the app's information as well as the Terms & Conditions and Privacy Policy for Branch International...
 
 ## Testing
+- Branch has been tested based on the following categories:
+
+### 1. Unit Tests
+
+
+### 2. Robo Tests
+
+
+### 3. Security Tests
 
 
 ## Screenshots
@@ -92,11 +101,13 @@ Branch has been built using the following Tools, Technologies, and Libraries:
 ### 8. LeakCanary
 - To detect and fix memory leaks, [LeakCanary]() has been implemented...
 
-### 9. MockK
+### 9. MockK, Kotlin Coroutines Test, and Robolectric
 - During testing [MockK]() has been used to mimic the dependencies that are to be tested resulting in a close-to-real test case scenario...
-
-### 10. Robolectric
 - In addition to MockK, [Robolectric]() has been utilised to provide a simulated Android environment to run test cases that rely on Android-specific dependencies...
+- The Unit Tests used the [Kotlin Coroutines Test]() library to provide the Coroutine Scopes for the suspending functions that were being tested...
+
+### 10. Firebase
+- Branch has incorporated Firebase Performance and Firebase Analytics for conducting app analysis...
 
 ## Trivia
 - Branch has used a hybrid modularisation technique where each of the modules listed above has implemented sub-modules that match the Presentation, Domain, and Data Layers in Android...
