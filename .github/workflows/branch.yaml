@@ -21,6 +21,17 @@ jobs:
           java-version: '17'
           cache: gradle
 
+      - name: Create local.properties...
+        run: |
+          echo "privacyPolicy=${{ secrets.PRIVACY_POLICY }}" > local.properties
+          echo "termsOfUse=${{ secrets.TERMS_OF_USE }}" >> local.properties
+          echo "authHeader=${{ secrets.AUTH_HEADER }}" >> local.properties
+          echo "authToken=${{ secrets.AUTH_TOKEN }}" >> local.properties
+          echo "baseUrl=${{ secrets.BASE_URL }}" >> local.properties
+          echo "messagesEndpoint=${{ secrets.MESSAGES_ENDPOINT }}" >> local.properties
+          echo "resetEndpoint=${{ secrets.RESET_ENDPOINT }}" >> local.properties
+          echo "loginEndpoint=${{ secrets.LOGIN_ENDPOINT }}" >> local.properties
+
       - name: Make gradlew executable...
         run: chmod +x gradlew
 
