@@ -11,12 +11,12 @@ Branch is an Android application that utilises a REST API built and maintained b
 1. [Background](#Background)
 2. [Architecture](#Architecture)
 3. [Testing](#Testing)
-4. [Screenshots](#Screenshots)
-5. [Credits](#Credits)
-6. [Trivia](#Trivia)
+4. [Credits](#Credits)
+5. [Trivia](#Trivia)
+6. [Future](#Future)
 7. [License](#License)
 
-## Background
+## 1. Background
 - This project is an implementation of the Take Home Assignment offered by Branch International...
 - It utilises [The Branch API](https://android-messaging.branch.co/) which has the following endpoints:
 
@@ -30,7 +30,7 @@ Branch is an Android application that utilises a REST API built and maintained b
 ### 3. /api/reset
 - To reset the customer messages to their original state, this endpoint can be called using a POST request...
 
-## Architecture
+## 2. Architecture
 - Branch is a multi-module Android app implemented using the Model-View-ViewModel (MVVM) Architectural Pattern...
 - It is divided into the following modules:
 
@@ -60,7 +60,7 @@ Branch is an Android application that utilises a REST API built and maintained b
 - This is an auxiliary module that contains the About Screen and its ViewModels...
 - It provides the app's information as well as the Terms & Conditions and Privacy Policy for Branch International...
 
-## Testing
+## 3. Testing
 - Branch has been tested based on the following categories:
 
 ### 1. Unit Tests
@@ -81,20 +81,8 @@ Branch is an Android application that utilises a REST API built and maintained b
 ![The Security Test](https://github.com/emmanuelmuturia/Branch/assets/55001497/40d86620-fb4c-4200-8769-15e3f17b5f22)
 
 
-## Screenshots
-
-Here are the screenshots for Branch:
-
-![Login](https://github.com/emmanuelmuturia/Branch/assets/55001497/1c512024-ca5a-4826-a6b9-09f2ee1ce249)
-
-![Messages](https://github.com/emmanuelmuturia/Branch/assets/55001497/77da7fb9-33f7-476a-a57d-598f49feb997)
-
-![Conversation](https://github.com/emmanuelmuturia/Branch/assets/55001497/864b5e5e-67d7-4092-8c87-6d83c5c155bd)
-
-
-
-### Credits
-Branch has been built using the following Tools, Technologies, and Libraries:
+## 4. Credits
+- Branch has been built using the following Tools, Technologies, and Libraries:
 
 ### 1. Jetpack Compose
 - The app has utilised Google's modern UI toolkit ([Jetpack Compose]()) for its User Interface that prioritises the Kotlin-first approach of Android App Development (AAD)...
@@ -103,32 +91,35 @@ Branch has been built using the following Tools, Technologies, and Libraries:
 - To provide dependencies in an easy and modular fashion, [Dagger-Hilt]() has been used in conjunction with:
 
 ### 3. Kotlin Symbol Processing (KSP)
-- For faster builds in regards to Annotations, [KSP]() has been implemented in form of a plugin...
+- For faster builds regarding Annotations, [KSP]() has been implemented as a plugin...
 
 ### 4. Retrofit2
 - As a core library, [Retrofit2]() has been utilised for performing remote calls to the REST API through a level of abstraction...
 
 ### 5. OkHTTP3
-- In addition to Retrofit2, [OkHTTP3]() has also been implemented to aid in the configuration of the remote calls by providing an Interceptor and specifying the expected data type as JSON...
+- In addition to Retrofit2, [OkHTTP3]() has also been implemented to aid in configuring the remote calls by providing an Interceptor and specifying the expected data type as JSON...
 
 ### 6. Kotlin Serialization
 - During the remote calls, the returned data has been serialized and deserialized using the [Kotlin Serialization Plugin]()...
 
 ### 7. Splash Screen
-- The app has implemented its Splash Screen using Google's [Splash Screen API]() that uses its own custom theme alongside the app's theme...
+- The app has implemented its Splash Screen using Google's [Splash Screen API]() which uses its custom theme alongside the app's theme...
 
 ### 8. LeakCanary
 - To detect and fix memory leaks, [LeakCanary]() has been implemented...
 
 ### 9. MockK, Kotlin Coroutines Test, and Robolectric
-- During testing [MockK]() has been used to mimic the dependencies that are to be tested resulting in a close-to-real test case scenario...
+- During testing [MockK]() has been used to mimic the dependencies to be tested resulting in a close-to-real test case scenario...
 - In addition to MockK, [Robolectric]() has been utilised to provide a simulated Android environment to run test cases that rely on Android-specific dependencies...
 - The Unit Tests used the [Kotlin Coroutines Test]() library to provide the Coroutine Scopes for the suspending functions that were being tested...
 
 ### 10. Firebase
 - Branch has incorporated Firebase Performance and Firebase Analytics for conducting app analysis...
 
-## Trivia
+## 5. Trivia
 - Branch has used a hybrid modularisation technique where each of the modules listed above has implemented sub-modules that match the Presentation, Domain, and Data Layers in Android...
 
-## License
+## 6. Future
+- Branch has been fully built and no future developments are in place...
+
+## 7. License
