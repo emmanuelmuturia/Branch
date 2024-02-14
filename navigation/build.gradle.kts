@@ -51,7 +51,6 @@ dependencies {
 
     // Module(s)...
     val moduleList = listOf(
-        "commons:datalayer",
         "commons:uilayer",
         "authentication:uilayer",
         "messages:uilayer",

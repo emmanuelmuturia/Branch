@@ -17,7 +17,6 @@ rootProject.name = "Branch"
 include(":app")
 include(":commons:uilayer")
 include(":commons:domainlayer")
-include(":commons:datalayer")
 include(":navigation")
 include(":network:datalayer")
 include(":network:domainlayer")
