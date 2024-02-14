@@ -16,7 +16,7 @@ Branch is an Android application that utilises a REST API built and maintained b
 6. [Future](#Future)
 7. [License](#License)
 
-## 1. Background
+## 1) Background
 - This project is an implementation of the Take Home Assignment offered by Branch International...
 - It utilises [The Branch API](https://android-messaging.branch.co/) which has the following endpoints:
 
