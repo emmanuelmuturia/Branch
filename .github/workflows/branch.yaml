@@ -1,0 +1,47 @@
+name: Branch
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17...
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          cache: gradle
+
+      - name: Load the Google Service JSON file...
+        env:
+          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $DATA | base64 -di > app/google-services.json
+
+      - name: Create local.properties...
+        run: |
+          echo "privacyPolicy=${{ secrets.PRIVACY_POLICY }}" > local.properties
+          echo "termsOfUse=${{ secrets.TERMS_OF_USE }}" >> local.properties
+          echo "authHeader=${{ secrets.AUTH_HEADER }}" >> local.properties
+          echo "authToken=${{ secrets.AUTH_TOKEN }}" >> local.properties
+          echo "baseUrl=${{ secrets.BASE_URL }}" >> local.properties
+          echo "messagesEndpoint=${{ secrets.MESSAGES_ENDPOINT }}" >> local.properties
+          echo "resetEndpoint=${{ secrets.RESET_ENDPOINT }}" >> local.properties
+          echo "loginEndpoint=${{ secrets.LOGIN_ENDPOINT }}" >> local.properties
+
+      - name: Make gradlew executable...
+        run: chmod +x gradlew
+
+      - name: Build with Gradle...
+        run: ./gradlew build
+
+      - name: Run the Unit Tests...
+        run: ./gradlew test
