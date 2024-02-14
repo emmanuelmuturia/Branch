@@ -21,6 +21,11 @@ jobs:
           java-version: '17'
           cache: gradle
 
+      - name: Load the Google Service JSON file...
+        env:
+          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $DATA | base64 -di > app/google-services.json
+
       - name: Create local.properties...
         run: |
           echo "privacyPolicy=${{ secrets.PRIVACY_POLICY }}" > local.properties
