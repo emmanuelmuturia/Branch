@@ -1,7 +1,8 @@
 # Branch
 
-![The Branch Logo](https://github.com/emmanuelmuturia/Branch/assets/55001497/4f47e342-82aa-4425-ab95-6426aeb1b9f0)
-
+<div style="text-align: center;">
+  ![The Branch Logo](https://github.com/emmanuelmuturia/Branch/assets/55001497/4f47e342-82aa-4425-ab95-6426aeb1b9f0)
+</div>
 
 ## Overview
 Branch is an Android application that utilises a REST API built and maintained by Branch International to fetch and interact with customer data...
