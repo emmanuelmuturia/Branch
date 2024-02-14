@@ -5,3 +5,7 @@ string enter_password
 string enter_username
 string login
 string login_screen_logo
+string enter_password
+string enter_username
+string login
+string login_screen_logo

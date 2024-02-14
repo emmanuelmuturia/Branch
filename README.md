@@ -130,7 +130,7 @@ Branch is an Android application that utilises a REST API built and maintained b
 ```
 MIT License
 
-Copyright (c) 2024 Emmanuel Muturia™
+Copyright (c) 2024 Emmanuel Muturia
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
