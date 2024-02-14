@@ -63,6 +63,9 @@ Branch is an Android application that utilises a REST API built and maintained b
 - Branch has been tested based on the following categories:
 
 ### 1. Unit Tests
+- The Unit Tests were written using MockK and Robolectric:
+
+![The Unit Tests](https://github.com/emmanuelmuturia/Branch/assets/55001497/a2433afd-2e9f-4f45-b97e-5ccbac38e0b8)
 
 
 ### 2. Robo Tests
