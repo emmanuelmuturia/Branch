@@ -72,6 +72,8 @@ Branch is an Android application that utilises a REST API built and maintained b
 
 
 ### 3. Security Tests
+- The Security Tests were conducted using Snyk:
+
 
 
 ## Screenshots
