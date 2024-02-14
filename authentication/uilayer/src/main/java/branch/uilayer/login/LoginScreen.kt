@@ -127,7 +127,7 @@ fun LoginTextFields(
         value = username,
         onValueChange = { onUsernameChanged(it) },
         label = {
-            Text(text = "Enter username", style = MaterialTheme.typography.bodyLarge)
+            Text(text = "Enter username", style = MaterialTheme.typography.bodyLarge, color = BranchDarkBlue)
         },
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -143,7 +143,7 @@ fun LoginTextFields(
         value = password,
         onValueChange = { onPasswordChanged(it) },
         label = {
-            Text(text = "Enter password", style = MaterialTheme.typography.bodyLarge)
+            Text(text = "Enter password", style = MaterialTheme.typography.bodyLarge, color = BranchDarkBlue)
         },
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),

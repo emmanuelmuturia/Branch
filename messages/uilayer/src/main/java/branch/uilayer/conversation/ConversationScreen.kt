@@ -83,7 +83,7 @@ fun ConversationScreen(
 
             else -> Column(modifier = Modifier.fillMaxSize()) {
 
-                BranchHeader(navigateBack = navigateBack, headerTitle = "Conversations")
+                BranchHeader(navigateBack = navigateBack, headerTitle = "Conversation")
 
                 LazyColumn(
                     modifier = Modifier
@@ -163,7 +163,7 @@ fun BranchMessageInputField(
                 }),
             imageVector = Icons.AutoMirrored.Rounded.Send,
             contentDescription = "Notifications Button",
-            tint = BranchDarkBlue
+            tint = Color.White
         )
 
     }
