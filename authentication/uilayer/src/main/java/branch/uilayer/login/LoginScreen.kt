@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -42,6 +43,8 @@ import branch.commons.components.BranchBackgroundImage
 import branch.commons.theme.BranchDarkBlue
 import branch.commons.theme.BranchLightBlue
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
@@ -124,11 +127,14 @@ fun LoginTextFields(
         value = username,
         onValueChange = { onUsernameChanged(it) },
         label = {
-                Text(text = "Enter username", style = MaterialTheme.typography.bodyLarge)
+            Text(text = "Enter username", style = MaterialTheme.typography.bodyLarge)
         },
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        colors = TextFieldDefaults.colors(focusedContainerColor = Color.Transparent, unfocusedContainerColor = Color.Transparent)
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent
+        )
     )
 
     Spacer(modifier = Modifier.height(height = 14.dp))
@@ -141,7 +147,10 @@ fun LoginTextFields(
         },
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        colors = TextFieldDefaults.colors(focusedContainerColor = Color.Transparent, unfocusedContainerColor = Color.Transparent),
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent
+        ),
         visualTransformation = PasswordVisualTransformation()
     )
 
@@ -156,33 +165,27 @@ fun LoginButton(
     navigateToMessagesScreen: () -> Unit
 ) {
 
-    val isLoginSuccessful by loginScreenViewModel.isLoginSuccessful.collectAsStateWithLifecycle()
-
     val context = LocalContext.current
+
+    val scope = rememberCoroutineScope()
 
     Button(
         onClick = {
-            loginScreenViewModel.login(username = username, password = password)
+            scope.launch {
+
+                if (password == username.reversed()) {
+                    loginScreenViewModel.login(username = username, password = password)
+                    navigateToMessagesScreen()
+                } else {
+                    Toast.makeText(context, "Wrong Credentials!!!", Toast.LENGTH_LONG).show()
+                }
+
+            }
         },
         shape = RoundedCornerShape(size = 21.dp),
         colors = ButtonDefaults.buttonColors(containerColor = BranchDarkBlue)
     ) {
         Text(text = "Login", style = MaterialTheme.typography.bodyLarge)
-    }
-
-    LaunchedEffect(isLoginSuccessful) {
-        if (isLoginSuccessful) {
-            navigateToMessagesScreen()
-        }
-    }
-
-    LaunchedEffect(loginScreenViewModel.isLoginSuccessful) {
-        val updatedIsLoginSuccessful = loginScreenViewModel.isLoginSuccessful.first()
-        if (updatedIsLoginSuccessful) {
-            navigateToMessagesScreen()
-        } else {
-            Toast.makeText(context, "Wrong Credentials!!!", Toast.LENGTH_LONG).show()
-        }
     }
 
 }

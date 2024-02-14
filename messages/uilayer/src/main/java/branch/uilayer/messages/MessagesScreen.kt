@@ -119,8 +119,7 @@ fun HomeScreenHeader(navController: NavHostController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 42.dp, start = 14.dp, end = 14.dp, bottom = 21.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        //verticalAlignment = Alignment.CenterVertically
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
         Text(

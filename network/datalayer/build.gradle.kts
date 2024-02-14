@@ -70,6 +70,9 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
+    // DataStore...
+    implementation(dependencyNotation = libs.datastore)
+
     // Dagger-Hilt...
     implementation(dependencyNotation = libs.hilt.android)
     "ksp"(dependencyNotation = libs.hilt.android.compiler)
