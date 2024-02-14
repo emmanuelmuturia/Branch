@@ -74,9 +74,19 @@ Branch is an Android application that utilises a REST API built and maintained b
 ### 3. Security Tests
 - The Security Tests were conducted using Snyk:
 
+![The Security Test](https://github.com/emmanuelmuturia/Branch/assets/55001497/40d86620-fb4c-4200-8769-15e3f17b5f22)
 
 
 ## Screenshots
+
+Here are the screenshots for Branch:
+
+![Login](https://github.com/emmanuelmuturia/Branch/assets/55001497/1c512024-ca5a-4826-a6b9-09f2ee1ce249)
+
+![Messages](https://github.com/emmanuelmuturia/Branch/assets/55001497/77da7fb9-33f7-476a-a57d-598f49feb997)
+
+![Conversation](https://github.com/emmanuelmuturia/Branch/assets/55001497/864b5e5e-67d7-4092-8c87-6d83c5c155bd)
+
 
 
 ### Credits
