@@ -1,1 +1,8 @@
 branch.messages.uilayer
+string agent_id
+string good_afternoon
+string good_evening
+string good_morning
+string message
+string sent_at
+string user_id
