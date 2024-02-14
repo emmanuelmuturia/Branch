@@ -51,7 +51,8 @@ fun BranchHeader(navigateBack: () -> Unit, headerTitle: String) {
             Text(
                 text = headerTitle,
                 style = MaterialTheme.typography.titleLarge,
-                fontSize = 25.sp
+                fontSize = 25.sp,
+                color = BranchDarkBlue
             )
         }
 

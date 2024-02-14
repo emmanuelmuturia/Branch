@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material.icons.rounded.Search
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -78,7 +79,7 @@ fun MessagesScreen(navController: NavHostController) {
 
             Column(modifier = Modifier.fillMaxSize()) {
 
-                HomeScreenHeader()
+                HomeScreenHeader(navController = navController)
 
                 when (branchState) {
 
@@ -112,45 +113,33 @@ fun MessagesScreen(navController: NavHostController) {
 
 
 @Composable
-fun HomeScreenHeader() {
+fun HomeScreenHeader(navController: NavHostController) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 42.dp, start = 14.dp, end = 14.dp, bottom = 21.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        //verticalAlignment = Alignment.CenterVertically
     ) {
 
         Text(
             text = displayGreeting(),
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge,
+            color = BranchDarkBlue
         )
 
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Icon(
-                modifier = Modifier
-                    .padding(end = 21.dp)
-                    .size(size = 30.dp)
-                    .clickable(onClick = { }),
-                imageVector = Icons.Rounded.Search,
-                contentDescription = "Search Button",
-                tint = BranchDarkBlue
-            )
+        Icon(
+            modifier = Modifier
+                .size(size = 35.dp)
+                .clickable(onClick = {
+                    navController.navigate(route = "aboutScreen")
+                }),
+            imageVector = Icons.Rounded.Settings,
+            contentDescription = "Settings Button",
+            tint = BranchDarkBlue
+        )
 
-            Icon(
-                modifier = Modifier
-                    .size(size = 30.dp)
-                    .clickable(onClick = {
-
-                    }),
-                imageVector = Icons.Rounded.Notifications,
-                contentDescription = "Notifications Button",
-                tint = BranchDarkBlue
-            )
-        }
     }
 }
 
@@ -280,12 +269,13 @@ fun BranchMessageItem(branchMessage: BranchMessage, navController: NavHostContro
                     ) {
                         append(text = "Message: ")
                     }
-                    withStyle(style = SpanStyle(
-                        fontFamily = Caveat,
-                        fontSize = 21.sp,
-                        color = Color.White,
-                        fontWeight = FontWeight.Medium
-                    )
+                    withStyle(
+                        style = SpanStyle(
+                            fontFamily = Caveat,
+                            fontSize = 21.sp,
+                            color = Color.White,
+                            fontWeight = FontWeight.Medium
+                        )
                     ) {
                         append(text = branchMessage.messageBody)
                     }
