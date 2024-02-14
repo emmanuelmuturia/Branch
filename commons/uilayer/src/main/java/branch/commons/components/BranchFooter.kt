@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import branch.commons.theme.BranchDarkBlue
 import branch.commons.uilayer.R
 import java.util.Calendar
 
@@ -31,10 +31,11 @@ fun BranchFooter() {
 
         Text(
             text = stringResource(
-                R.string.branch_footer,
-                Calendar.getInstance()[Calendar.YEAR]
+                id = R.string.branch_footer,
+                formatArgs = arrayOf(Calendar.getInstance()[Calendar.YEAR])
             ),
-            style = MaterialTheme.typography.labelLarge
+            style = MaterialTheme.typography.labelLarge,
+            color = BranchDarkBlue
         )
 
     }

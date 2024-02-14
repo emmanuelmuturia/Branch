@@ -18,7 +18,10 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -36,12 +39,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import branch.commons.components.BranchBackgroundImage
 import branch.commons.components.BranchHeader
+import branch.commons.state.ErrorScreen
+import branch.commons.state.LoadingScreen
+import branch.commons.theme.BranchDarkBlue
+import branch.domainlayer.BranchState
 import branch.uilayer.messages.BranchMessageItem
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @Composable
 fun ConversationScreen(
@@ -51,12 +54,9 @@ fun ConversationScreen(
 
     val conversationScreenViewModel: ConversationScreenViewModel = hiltViewModel()
     val branchMessages by conversationScreenViewModel.branchMessages.collectAsStateWithLifecycle()
+    val branchState by conversationScreenViewModel.branchState.collectAsStateWithLifecycle()
 
     var messageResponse by rememberSaveable { mutableStateOf(value = "") }
-
-    val isLoading by conversationScreenViewModel.isLoading.collectAsStateWithLifecycle()
-
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isLoading)
 
     val messageThreadId = navController.currentBackStackEntry?.arguments?.getInt("messageThreadId")
 
@@ -66,33 +66,21 @@ fun ConversationScreen(
             conversationScreenViewModel.getMessagesByThread(threadId = messageThreadId)
         }
 
-        Timber.tag(tag = "The Thread Id:").d(message = "$messageThreadId")
-
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
 
         BranchBackgroundImage()
 
-        Column(modifier = Modifier.fillMaxSize()) {
+        when (branchState) {
 
-            BranchHeader(navigateBack = navigateBack, headerTitle = "Conversations")
+            is BranchState.Loading -> LoadingScreen()
 
-            SwipeRefresh(
-                state = swipeRefreshState,
-                onRefresh = {
-                    if (messageThreadId != null) {
-                        conversationScreenViewModel.refreshGetMessagesByThread(threadId = messageThreadId)
-                    }
-                },
-                indicator = { state, refreshTrigger ->
-                    SwipeRefreshIndicator(
-                        state = state,
-                        refreshTriggerDistance = refreshTrigger,
-                        backgroundColor = Color.Transparent,
-                        contentColor = Color.White
-                    )
-                }) {
+            is BranchState.Error -> ErrorScreen { navigateBack() }
+
+            else -> Column(modifier = Modifier.fillMaxSize()) {
+
+                BranchHeader(navigateBack = navigateBack, headerTitle = "Conversation")
 
                 LazyColumn(
                     modifier = Modifier
@@ -128,7 +116,7 @@ fun ConversationScreen(
 
 
 @Composable
-fun BranchMessageInputField(
+private fun BranchMessageInputField(
     messageThreadId: Int,
     conversationScreenViewModel: ConversationScreenViewModel,
     messageResponse: String,
@@ -148,23 +136,26 @@ fun BranchMessageInputField(
         OutlinedTextField(
             value = messageResponse,
             onValueChange = { onMessageResponseChanged(it) },
-            label = {},
+            label = {
+                Text(text = "Enter message", style = MaterialTheme.typography.bodyLarge)
+            },
             shape = RoundedCornerShape(size = 21.dp),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            colors = TextFieldDefaults.colors(focusedContainerColor = BranchDarkBlue, unfocusedContainerColor = BranchDarkBlue)
         )
 
         Spacer(modifier = Modifier.width(width = 7.dp))
 
         Icon(
             modifier = Modifier
-                .size(size = 30.dp)
+                .size(size = 42.dp)
                 .clickable(onClick = {
                     scope.launch {
                         conversationScreenViewModel.createMessage(
                             messageThreadId = messageThreadId,
                             messageBody = messageResponse
                         )
-                        //conversationScreenViewModel.getMessagesByThread(threadId = messageThreadId)
+                        conversationScreenViewModel.getMessagesByThread(threadId = messageThreadId)
                     }
                 }),
             imageVector = Icons.AutoMirrored.Rounded.Send,

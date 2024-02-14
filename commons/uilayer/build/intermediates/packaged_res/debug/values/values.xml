@@ -3,6 +3,6 @@
     <string name="arrow_back">Arrow Back</string>
     <string name="branch_background_image">Branch Background Image</string>
     <string name="branch_footer">Copyright © %1$d Branch International. All rights served.</string>
-    <string name="error_encountered_please_try_again">Error encountered. Please try again...</string>
+    <string name="error_encountered_please_try_again">Error encountered. Please try again…</string>
     <string name="error_image">Error Image</string>
 </resources>

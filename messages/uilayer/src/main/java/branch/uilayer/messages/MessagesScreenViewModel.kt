@@ -34,9 +34,8 @@ class MessagesScreenViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            _branchState.update { BranchState.Loading }
-
             try {
+                _branchState.update { BranchState.Loading }
                 _branchMessages.value = branchNetworkRepository.getMessages()
                 _branchState.update { BranchState.Success(data = _branchMessages.value) }
             } catch (e: Exception) {
@@ -49,7 +48,7 @@ class MessagesScreenViewModel @Inject constructor(
 
     fun reset() {
         viewModelScope.launch {
-            branchNetworkRepository.reset()
+            branchNetworkRepository.resetMessages()
         }
     }
 

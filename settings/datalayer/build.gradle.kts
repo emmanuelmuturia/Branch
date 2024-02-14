@@ -69,13 +69,13 @@ dependencies {
     implementation(dependencyNotation = libs.timber)
 
     // Android...
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
+    implementation(dependencyNotation = libs.androidx.core.ktx)
+    implementation(dependencyNotation = libs.appcompat)
+    implementation(dependencyNotation = libs.material)
 
     // Testing...
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(dependencyNotation = libs.junit)
+    androidTestImplementation(dependencyNotation = libs.androidx.junit)
+    androidTestImplementation(dependencyNotation = libs.androidx.espresso.core)
 
 }

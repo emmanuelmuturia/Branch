@@ -26,6 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import branch.commons.components.BranchBackgroundImage
 import branch.commons.components.BranchFooter
 import branch.commons.components.BranchHeader
+import branch.commons.theme.BranchDarkBlue
 import branch.settings.uilayer.R
 
 @Composable
@@ -39,7 +40,7 @@ fun AboutScreen(navigateBack: () -> Unit) {
 
             BranchHeader(
                 navigateBack = navigateBack,
-                headerTitle = stringResource(R.string.about)
+                headerTitle = stringResource(id = R.string.about)
             )
 
             AboutScreenContent()
@@ -97,8 +98,9 @@ private fun AboutScreenContent() {
             ) {
 
                 Text(
-                    text = aboutScreenViewModel.getAppVersion(context = context),
-                    style = MaterialTheme.typography.bodyLarge
+                    text = "(${aboutScreenViewModel.getAppVersion(context = context)})",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = BranchDarkBlue
                 )
 
             }
@@ -112,24 +114,28 @@ private fun AboutScreenContent() {
 @Composable
 private fun AboutListItem(imageId: Int, textId: Int, onClick: () -> Unit) {
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 10.dp)
-            .clickable(onClick = onClick),
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 7.dp)
+                .clickable(onClick = onClick),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
 
-        Image(
-            imageVector = ImageVector.vectorResource(id = imageId),
-            contentDescription = stringResource(id = textId)
-        )
+            Image(
+                imageVector = ImageVector.vectorResource(id = imageId),
+                contentDescription = stringResource(id = textId)
+            )
 
-        Spacer(modifier = Modifier.width(width = 21.dp))
+            Spacer(modifier = Modifier.width(width = 21.dp))
 
-        Text(text = stringResource(id = textId), style = MaterialTheme.typography.titleLarge)
+            Text(
+                text = stringResource(id = textId),
+                style = MaterialTheme.typography.titleLarge,
+                color = BranchDarkBlue
+            )
 
-    }
+        }
 
 }

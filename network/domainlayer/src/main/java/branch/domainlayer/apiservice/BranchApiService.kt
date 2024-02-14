@@ -5,12 +5,9 @@ import branch.domainlayer.dto.LoginRequest
 import branch.domainlayer.dto.LoginResponse
 import branch.domainlayer.dto.MessageRequest
 import branch.network.domainlayer.BuildConfig
-import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface BranchApiService {
 
@@ -28,6 +25,6 @@ interface BranchApiService {
     ): BranchMessage
 
     @POST(value = BuildConfig.resetEndpoint)
-    suspend fun reset()
+    suspend fun resetMessages()
 
 }

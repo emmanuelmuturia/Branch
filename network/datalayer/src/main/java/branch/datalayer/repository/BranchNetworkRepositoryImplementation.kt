@@ -1,22 +1,25 @@
 package branch.datalayer.repository
 
-import branch.datalayer.interceptor.BranchInterceptor
+import android.content.Context
+import branch.datalayer.sessionmanager.SessionManager
 import branch.domainlayer.apiservice.BranchApiService
 import branch.domainlayer.dto.BranchMessage
 import branch.domainlayer.dto.LoginRequest
 import branch.domainlayer.dto.LoginResponse
 import branch.domainlayer.dto.MessageRequest
 import branch.domainlayer.repository.BranchNetworkRepository
-import retrofit2.Call
+import retrofit2.HttpException
 import timber.log.Timber
 import javax.inject.Inject
 
 class BranchNetworkRepositoryImplementation @Inject constructor(
-    private val branchApiService: BranchApiService
+    private val branchApiService: BranchApiService,
+    context: Context
 ) : BranchNetworkRepository {
 
+    private val sessionManager: SessionManager = SessionManager(context = context)
+
     override suspend fun getMessages(): List<BranchMessage> {
-        Timber.tag(tag = "List of Messages").d(message = branchApiService.getMessages().toString())
         return branchApiService.getMessages()
     }
 
@@ -41,6 +44,8 @@ class BranchNetworkRepositoryImplementation @Inject constructor(
 
         return try {
             val response = branchApiService.login(loginRequest = loginRequest)
+            sessionManager.saveAuthToken(token = response.authToken)
+            Timber.tag(tag = "The Token:").d(message = "${sessionManager.fetchToken()}")
             response
         } catch (e: Exception) {
             null
@@ -52,8 +57,8 @@ class BranchNetworkRepositoryImplementation @Inject constructor(
         return branchApiService.getMessages().filter { it.messageThreadId == threadId }
     }
 
-    override suspend fun reset() {
-        branchApiService.reset()
+    override suspend fun resetMessages() {
+        branchApiService.resetMessages()
     }
 
 }

@@ -2,8 +2,6 @@ package branch.navigation.routes
 
 sealed class Routes(val route: String) {
 
-    data object WelcomeScreen : Routes(route = "welcomeScreen")
-
     data object LoginScreen : Routes(route = "loginScreen")
 
     data object MessagesScreen : Routes(route = "messagesScreen")

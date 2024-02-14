@@ -1,5 +1,7 @@
 package branch.datalayer.dependencyinjection
 
+import android.app.Application
+import android.content.Context
 import branch.datalayer.interceptor.BranchInterceptor
 import branch.datalayer.repository.BranchNetworkRepositoryImplementation
 import branch.domainlayer.apiservice.BranchApiService
@@ -12,10 +14,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -24,10 +24,16 @@ object BranchHiltModule {
 
     @Provides
     @Singleton
-    fun providesRetrofit(): Retrofit {
+    fun providesContext(application: Application): Context {
+        return application.applicationContext
+    }
+
+    @Provides
+    @Singleton
+    fun providesRetrofit(context: Context): Retrofit {
 
         val client = OkHttpClient.Builder().apply {
-            addInterceptor(interceptor = BranchInterceptor())
+            addInterceptor(interceptor = BranchInterceptor(context = context))
         }.build()
 
         val json = Json {
@@ -52,10 +58,12 @@ object BranchHiltModule {
     @Provides
     @Singleton
     fun providesBranchNetworkRepository(
-        branchApiService: BranchApiService
+        branchApiService: BranchApiService,
+        context: Context
     ): BranchNetworkRepository {
         return BranchNetworkRepositoryImplementation(
-            branchApiService = branchApiService
+            branchApiService = branchApiService,
+            context = context
         )
     }
 

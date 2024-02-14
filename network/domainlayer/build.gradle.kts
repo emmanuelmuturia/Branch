@@ -62,13 +62,13 @@ dependencies {
     }
 
     // Retrofit2
-    implementation(libs.retrofit)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(dependencyNotation = libs.retrofit)
+    implementation(dependencyNotation = libs.kotlinx.serialization.json)
+    implementation(dependencyNotation = libs.retrofit2.kotlinx.serialization.converter)
 
     //OkHTTP3...
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
+    implementation(dependencyNotation = libs.okhttp)
+    implementation(dependencyNotation = libs.logging.interceptor)
 
     // Dagger-Hilt...
     implementation(dependencyNotation = libs.hilt.android)
@@ -79,13 +79,13 @@ dependencies {
     implementation(dependencyNotation = libs.timber)
 
     // Android...
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
+    implementation(dependencyNotation = libs.androidx.core.ktx)
+    implementation(dependencyNotation = libs.appcompat)
+    implementation(dependencyNotation = libs.material)
 
     // Testing...
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(dependencyNotation = libs.junit)
+    androidTestImplementation(dependencyNotation = libs.androidx.junit)
+    androidTestImplementation(dependencyNotation = libs.androidx.espresso.core)
 
 }

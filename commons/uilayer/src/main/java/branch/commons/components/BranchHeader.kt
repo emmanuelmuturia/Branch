@@ -3,6 +3,7 @@ package branch.commons.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -51,11 +52,12 @@ fun BranchHeader(navigateBack: () -> Unit, headerTitle: String) {
             Text(
                 text = headerTitle,
                 style = MaterialTheme.typography.titleLarge,
-                fontSize = 25.sp
+                fontSize = 25.sp,
+                color = BranchDarkBlue
             )
         }
 
-        Row(modifier = Modifier.weight(weight = 1f)) {}
+        Spacer(modifier = Modifier.weight(weight = 1f))
 
     }
 
