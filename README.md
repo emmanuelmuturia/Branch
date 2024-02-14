@@ -70,7 +70,7 @@ Branch is an Android application that utilises a REST API built and maintained b
 
 
 ### b) UI Tests
-- The UI Tests have been performed using a Robot Test by Firebase Test Lab:
+- The UI Tests have been performed using a Robo Test by Firebase Test Lab:
 
 ![The Robo Test](https://github.com/emmanuelmuturia/Branch/assets/55001497/ecb85b7d-ff64-406b-9d48-2fc93824d3eb)
 
