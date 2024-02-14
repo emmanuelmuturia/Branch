@@ -2,7 +2,6 @@ package branch.uilayer.login
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
@@ -18,10 +17,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
@@ -33,17 +30,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import branch.authentication.uilayer.R
 import branch.commons.components.BranchBackgroundImage
 import branch.commons.theme.BranchDarkBlue
-import branch.commons.theme.BranchLightBlue
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 
 @Composable
@@ -103,12 +97,12 @@ fun LoginScreen(
 
 
 @Composable
-fun LoginScreenLogo() {
+private fun LoginScreenLogo() {
 
     Image(
         modifier = Modifier.size(size = 140.dp),
         painter = painterResource(id = R.drawable.login),
-        contentDescription = "Login Screen Logo",
+        contentDescription = stringResource(R.string.login_screen_logo),
         contentScale = ContentScale.Crop
     )
 
@@ -116,7 +110,7 @@ fun LoginScreenLogo() {
 
 
 @Composable
-fun LoginTextFields(
+private fun LoginTextFields(
     username: String,
     password: String,
     onUsernameChanged: (String) -> Unit,
@@ -127,7 +121,11 @@ fun LoginTextFields(
         value = username,
         onValueChange = { onUsernameChanged(it) },
         label = {
-            Text(text = "Enter username", style = MaterialTheme.typography.bodyLarge, color = BranchDarkBlue)
+            Text(
+                text = stringResource(R.string.enter_username),
+                style = MaterialTheme.typography.bodyLarge,
+                color = BranchDarkBlue
+            )
         },
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -143,7 +141,11 @@ fun LoginTextFields(
         value = password,
         onValueChange = { onPasswordChanged(it) },
         label = {
-            Text(text = "Enter password", style = MaterialTheme.typography.bodyLarge, color = BranchDarkBlue)
+            Text(
+                text = stringResource(R.string.enter_password),
+                style = MaterialTheme.typography.bodyLarge,
+                color = BranchDarkBlue
+            )
         },
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -158,7 +160,7 @@ fun LoginTextFields(
 
 
 @Composable
-fun LoginButton(
+private fun LoginButton(
     username: String,
     password: String,
     loginScreenViewModel: LoginScreenViewModel,
@@ -185,7 +187,7 @@ fun LoginButton(
         shape = RoundedCornerShape(size = 21.dp),
         colors = ButtonDefaults.buttonColors(containerColor = BranchDarkBlue)
     ) {
-        Text(text = "Login", style = MaterialTheme.typography.bodyLarge)
+        Text(text = stringResource(R.string.login), style = MaterialTheme.typography.bodyLarge)
     }
 
 }

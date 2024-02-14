@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="good_morning">Good Morning!</string>
+    <string name="good_afternoon">Good Afternoon!</string>
+    <string name="good_evening">Good Evening!</string>
+    <string name="user_id">"User ID: "</string>
+    <string name="agent_id">"Agent ID: "</string>
+    <string name="sent_at">"Sent At: "</string>
+    <string name="message">"Message: "</string>
+</resources>

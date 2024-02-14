@@ -7,7 +7,7 @@ import branch.domainlayer.BranchState
 import branch.domainlayer.dto.BranchMessage
 import branch.domainlayer.repository.BranchNetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,17 +25,19 @@ class ConversationScreenViewModel @Inject constructor(
         MutableStateFlow(value = emptyList())
     val branchMessages: StateFlow<List<BranchMessage>> = _branchMessages.asStateFlow()
 
-    private var _branchState: MutableStateFlow<BranchState<Any>> = MutableStateFlow(value = BranchState.Loading)
+    private var _branchState: MutableStateFlow<BranchState<Any>> =
+        MutableStateFlow(value = BranchState.Loading)
     val branchState: StateFlow<BranchState<Any>> = _branchState.asStateFlow()
 
     fun getMessagesByThread(threadId: Int) {
 
-        viewModelScope.launch {
+        viewModelScope.launch(context = Dispatchers.IO) {
 
             _branchState.update { BranchState.Loading }
 
             try {
-                _branchMessages.value = branchNetworkRepository.getMessagesByThread(threadId = threadId)
+                _branchMessages.value =
+                    branchNetworkRepository.getMessagesByThread(threadId = threadId)
                 _branchState.update { BranchState.Success(data = _branchMessages.value) }
             } catch (e: Exception) {
                 _branchState.update { BranchState.Error(error = e) }

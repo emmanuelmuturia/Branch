@@ -45,7 +45,6 @@ import branch.commons.theme.BranchDarkBlue
 import branch.domainlayer.BranchState
 import branch.uilayer.messages.BranchMessageItem
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @Composable
 fun ConversationScreen(
@@ -67,8 +66,6 @@ fun ConversationScreen(
             conversationScreenViewModel.getMessagesByThread(threadId = messageThreadId)
         }
 
-        Timber.tag(tag = "The Thread Id:").d(message = "$messageThreadId")
-
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -79,7 +76,7 @@ fun ConversationScreen(
 
             is BranchState.Loading -> LoadingScreen()
 
-            is BranchState.Error -> ErrorScreen {}
+            is BranchState.Error -> ErrorScreen { navigateBack() }
 
             else -> Column(modifier = Modifier.fillMaxSize()) {
 
@@ -119,7 +116,7 @@ fun ConversationScreen(
 
 
 @Composable
-fun BranchMessageInputField(
+private fun BranchMessageInputField(
     messageThreadId: Int,
     conversationScreenViewModel: ConversationScreenViewModel,
     messageResponse: String,

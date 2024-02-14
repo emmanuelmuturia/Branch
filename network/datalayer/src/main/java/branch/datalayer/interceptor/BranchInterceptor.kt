@@ -9,16 +9,14 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class BranchInterceptor(context: Context): Interceptor {
+class BranchInterceptor(context: Context) : Interceptor {
 
     private val sessionManager: SessionManager = SessionManager(context = context)
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
-        runBlocking {
-            sessionManager.fetchToken()?.let { authToken ->
-                requestBuilder.addHeader(name = BuildConfig.authHeader, value = authToken)
-            }
+        sessionManager.fetchToken()?.let { authToken ->
+            requestBuilder.addHeader(name = BuildConfig.authHeader, value = authToken)
         }
         return chain.proceed(request = requestBuilder.build())
     }
