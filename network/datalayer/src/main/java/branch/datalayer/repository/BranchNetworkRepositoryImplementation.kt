@@ -8,6 +8,7 @@ import branch.domainlayer.dto.LoginRequest
 import branch.domainlayer.dto.LoginResponse
 import branch.domainlayer.dto.MessageRequest
 import branch.domainlayer.repository.BranchNetworkRepository
+import retrofit2.HttpException
 import timber.log.Timber
 import javax.inject.Inject
 
